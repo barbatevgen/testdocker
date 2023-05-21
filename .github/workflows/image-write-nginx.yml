@@ -26,8 +26,39 @@ jobs:
       run: |
             echo "time=$(date +'%Y-%m-%dT-%H-%M-%S')" >> ${GITHUB_ENV}
 
-    - name: Build the Docker image
-      run: docker build . --file nginx+mysql/write/Dockerfile --tag ebarbat/test:Write$time
+  #  - name: Build the Docker image
+  #    run: docker build . --file nginx+mysql/write/Dockerfile --tag ebarbat/test:Write$time
       
-    - name: Push the Docker image
-      run: docker push ebarbat/test:Write$time  #nginxWrite-q
+  #  - name: Push the Docker image
+  #    run: docker push ebarbat/test:Write$time  #nginxWrite-q
+      
+      
+    - name: change web-write
+      run: |
+            echo "apiVersion: apps/v1" > nginx+mysql/web-write-db.yaml
+            echo "kind: Deployment" >> nginx+mysql/web-write-db.yaml
+            echo "metadata:" >> nginx+mysql/web-write-db.yaml
+            echo "  name: write-deployment" >> nginx+mysql/web-write-db.yaml
+            echo "  labels:" >> nginx+mysql/web-write-db.yaml
+            echo "    app: write" >> nginx+mysql/web-write-db.yaml
+
+            echo "spec:" >> nginx+mysql/web-write-db.yaml
+            echo "  replicas: 1" >> nginx+mysql/web-write-db.yaml
+            echo "  selector:" >> nginx+mysql/web-write-db.yaml
+            echo "    matchLabels:" >> nginx+mysql/web-write-db.yaml
+            echo "      app: write" >> nginx+mysql/web-write-db.yaml
+            echo "  template:" >> nginx+mysql/web-write-db.yaml
+            echo "    metadata:" >> nginx+mysql/web-write-db.yaml
+            echo "      labels:" >> nginx+mysql/web-write-db.yaml
+            echo "        app: write" >> nginx+mysql/web-write-db.yaml
+            echo "    spec:" >> nginx+mysql/web-write-db.yaml
+            echo "      containers:" >> nginx+mysql/web-write-db.yaml
+            echo "      - name: nginx-write" >> nginx+mysql/web-write-db.yaml
+            echo "        image: ebarbat/test:$time" >> nginx+mysql/web-write-db.yaml
+            echo "        imagePullPolicy: \"Always\"" >> nginx+mysql/web-write-db.yaml
+            echo "        ports:" >> nginx+mysql/web-write-db.yaml
+            echo "        - containerPort: 80" >> nginx+mysql/web-write-db.yaml
+            echo "        - containerPort: 443 " >> nginx+mysql/web-write-db.yaml
+            
+    - name: ls -la
+      run: ls -la
