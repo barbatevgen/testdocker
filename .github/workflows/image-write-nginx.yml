@@ -75,7 +75,7 @@ jobs:
           destination-repository: 'git@github.com:barbatevgen/testkub.git'
           destination-directory: 'nginx+mysql'
           commit-email: barbatevgen@gmail.com
-          
+          target-branch: main
           
           
           
