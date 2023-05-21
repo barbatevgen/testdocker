@@ -72,7 +72,7 @@ jobs:
       with:
           source-files: 'nginx+mysql/web-write-db.yaml'
     #      destination-username: 'barbatevgen'
-          destination-repository: 'testkub'
+          destination-repository: 'git@github.com:barbatevgen/testkub.git'
           destination-directory: 'nginx+mysql'
           commit-email: barbatevgen@gmail.com
           
