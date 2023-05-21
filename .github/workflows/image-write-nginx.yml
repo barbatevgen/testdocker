@@ -28,4 +28,4 @@ jobs:
       run: docker build . --file nginx+mysql/write/Dockerfile --tag ebarbat/test:Write$time
       
     - name: Push the Docker image
-      run: docker push ebarbat/test:Write$time  #nginxWrite
+      run: docker push ebarbat/test:Write$time  #nginxWrite-q
