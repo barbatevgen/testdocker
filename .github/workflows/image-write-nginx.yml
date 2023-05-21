@@ -61,4 +61,4 @@ jobs:
             echo "        - containerPort: 443 " >> nginx+mysql/web-write-db.yaml
             
     - name: ls -la
-      run: ls -la
+      run: cat nginx+mysql/web-write-db.yaml
