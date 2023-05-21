@@ -71,10 +71,10 @@ jobs:
         SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
       with:
           source-files: 'nginx+mysql/web-write-db.yaml'
-          destination-username: 'barbatevgen'
+    #      destination-username: 'barbatevgen'
           destination-repository: 'testkub'
           destination-directory: 'nginx+mysql'
-          commit-email: 'barbatevgen@gmail.com'
+          commit-email: barbatevgen@gmail.com
           
           
           
