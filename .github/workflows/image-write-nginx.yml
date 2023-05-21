@@ -1,0 +1,31 @@
+name: image-write-nginx
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: set release date
+      run: |
+            echo "time=$(date +'%Y-%m-%dT-%H-%M-%S')" >> ${GITHUB_ENV}
+
+    - name: Build the Docker image
+      run: docker build . --file nginx+mysql/write/Dockerfile --tag ebarbat/test:Write$time
+      
+    - name: Push the Docker image
+      run: docker push ebarbat/test:Write$time  #nginxWrite
