@@ -62,3 +62,21 @@ jobs:
             
     - name: ls -la
       run: cat nginx+mysql/web-write-db.yaml
+      
+      
+      
+    - name: Push generated webpage to another repository
+      uses: nkoppel/push-files-to-another-repository@1.1.0
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+          source-files: 'nginx+mysql/web-write-db.yaml'
+          destination-username: 'barbatevgen'
+          destination-repository: 'github.com:barbatevgen/testkub'
+          destination-directory: 'nginx+mysql'
+          commit-email: 'barbatevgen@gmail.com'
+          
+          
+          
+          
+          
