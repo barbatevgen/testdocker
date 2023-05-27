@@ -75,7 +75,7 @@ jobs:
         DESTINATION_REPO_NAME: ${{ secrets.DESTINATION_REPO_NAME }}
       with:
         source-directory: 'nginx+mysql/web-write-db.yaml'
-        destination-github-username: ${{ secrets.GH_USERNAME }}
+        destination-github-username: 'barbatevgen' #${{ secrets.GH_USERNAME }}
         destination-repository-name: ${{ secrets.DESTINATION_REPO_NAME }}
         user-email: ${{ secrets.USER_EMAIL }}
         commit-message: See ORIGIN_COMMIT from $GITHUB_REF
