@@ -70,10 +70,10 @@ jobs:
       env:
         SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
       with:
-          source-files: 'nginx+mysql/web-write-db.yaml'
-    #      destination-username: 'barbatevgen'
-          destination-repository: 'git@github.com:barbatevgen/testkub.git'
-          destination-directory: 'nginx+mysql'
+          source-files: nginx+mysql/web-write-db.yaml
+          destination-username: barbatevgen
+          destination-repository: barbatevgen/testkub
+          destination-directory: nginx+mysql
           commit-email: barbatevgen@gmail.com
           target-branch: main
           
