@@ -60,9 +60,12 @@ jobs:
             echo "        - containerPort: 80" >> nginx+mysql/web-write-db.yaml
             echo "        - containerPort: 443 " >> nginx+mysql/web-write-db.yaml
             
-    - name: ls -la
+    - name: cat
       run: cat nginx+mysql/web-write-db.yaml
-      
+    - name: pwd
+      run: pwd
+    - name: ls -la
+      run: ls -la
       
       
     - name: Push generated webpage to another repository
