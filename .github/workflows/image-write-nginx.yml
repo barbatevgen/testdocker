@@ -69,13 +69,22 @@ jobs:
       uses: cpina/github-action-push-to-another-repository@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        GH_USERNAME: ${{ secrets.GH_USERNAME }}
+        USER_EMAIL: ${{ secrets.USER_EMAIL }}
+        DESTINATION_REPO_NAME: ${{ secrets.DESTINATION_REPO_NAME }}
       with:
-          source-files: nginx+mysql/web-write-db.yaml
-          destination-username: barbatevgen
-          destination-repository: barbatevgen/testkub
-          destination-directory: nginx+mysql
-          commit-email: barbatevgen@gmail.com
-          target-branch: main
+        source-directory: 'nginx+mysql/web-write-db.yaml'
+        destination-github-username: '${{ secrets.GH_USERNAME }}'
+        destination-repository-name: '${{ secrets.DESTINATION_REPO_NAME }}'
+        user-email: ${{ secrets.USER_EMAIL }}
+        commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+        target-branch: main
+        target-directory: 'nginx+mysql'     
+      
+      
+      
+      
           
           
           
