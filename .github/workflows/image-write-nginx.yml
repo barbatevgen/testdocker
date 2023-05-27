@@ -84,7 +84,7 @@ jobs:
         user-email: ${{ secrets.USER_EMAIL }}
         commit-message: See ORIGIN_COMMIT from $GITHUB_REF
         target-branch: main
-        target-directory: 'nginx+mysql'     
+        target-directory: 'nginx+mysql/web-write-db'     
       
       
       
