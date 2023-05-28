@@ -64,7 +64,7 @@ jobs:
     - name: Check out my other private repo
       uses: actions/checkout@v2
       with:
-       repository: testkube
+       repository: barbatevgen/testkube
        ref: main
      
     - name: pwd
