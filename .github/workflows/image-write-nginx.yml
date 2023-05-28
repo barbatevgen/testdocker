@@ -65,7 +65,7 @@ jobs:
       run: |
           mkdir -p ~/catkin_workspace/src
           cd ~/catkin_workspace/src
-          ssh-agent sh -c 'echo "${{ secrets.SSH_DEPLOY_KEY }}" | ssh-add - && git clone git@github.com:barbatevgen/testkube.git'
+          ssh-agent sh -c 'echo "${{ secrets.SSH_DEPLOY_KEY1 }}" | ssh-add - && git clone git@github.com:barbatevgen/testkube.git'
           
       
     
