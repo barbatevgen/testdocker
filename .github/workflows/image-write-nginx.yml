@@ -62,7 +62,7 @@ jobs:
             echo "        - containerPort: 443 " >> nginx+mysql1/web-write-db.yaml
             
     - name: Check out my other private repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
        repository: barbatevgen/testkube
        ref: main
