@@ -13,7 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
+    - name: Check out the repo
+      uses: actions/checkout@v3
+      
     - name: Log in to Docker Hub
       uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
       with:
@@ -24,8 +26,77 @@ jobs:
       run: |
             echo "time=$(date +'%Y-%m-%dT-%H-%M-%S')" >> ${GITHUB_ENV}
 
-    - name: Build the Docker image
-      run: docker build . --file nginx+mysql/write/Dockerfile --tag ebarbat/test:Write$time
+  #  - name: Build the Docker image
+  #    run: docker build . --file nginx+mysql/write/Dockerfile --tag ebarbat/test:Write$time
       
-    - name: Push the Docker image
-      run: docker push ebarbat/test:Write$time  #nginxWrite
+  #  - name: Push the Docker image
+  #    run: docker push ebarbat/test:Write$time  #nginxWrite-q
+      
+    - name: create folder
+      run: mkdir nginx+mysql1
+    - name: change web-write
+      run: |
+            echo "apiVersion: apps/v1" > nginx+mysql1/web-write-db.yaml
+            echo "kind: Deployment" >> nginx+mysql1/web-write-db.yaml
+            echo "metadata:" >> nginx+mysql1/web-write-db.yaml
+            echo "  name: write-deployment" >> nginx+mysql1/web-write-db.yaml
+            echo "  labels:" >> nginx+mysql1/web-write-db.yaml
+            echo "    app: write" >> nginx+mysql1/web-write-db.yaml
+
+            echo "spec:" >> nginx+mysql1/web-write-db.yaml
+            echo "  replicas: 1" >> nginx+mysql1/web-write-db.yaml
+            echo "  selector:" >> nginx+mysql1/web-write-db.yaml
+            echo "    matchLabels:" >> nginx+mysql1/web-write-db.yaml
+            echo "      app: write" >> nginx+mysql1/web-write-db.yaml
+            echo "  template:" >> nginx+mysql1/web-write-db.yaml
+            echo "    metadata:" >> nginx+mysql1/web-write-db.yaml
+            echo "      labels:" >> nginx+mysql1/web-write-db.yaml
+            echo "        app: write" >> nginx+mysql1/web-write-db.yaml
+            echo "    spec:" >> nginx+mysql1/web-write-db.yaml
+            echo "      containers:" >> nginx+mysql1/web-write-db.yaml
+            echo "      - name: nginx-write" >> nginx+mysql1/web-write-db.yaml
+            echo "        image: ebarbat/test:$time" >> nginx+mysql1/web-write-db.yaml
+            echo "        imagePullPolicy: \"Always\"" >> nginx+mysql1/web-write-db.yaml
+            echo "        ports:" >> nginx+mysql1/web-write-db.yaml
+            echo "        - containerPort: 80" >> nginx+mysql1/web-write-db.yaml
+            echo "        - containerPort: 443 " >> nginx+mysql1/web-write-db.yaml
+            
+    - name: Check out my other private repo
+      run: |
+          mkdir -p ~/catkin_workspace/src
+          cd ~/catkin_workspace/src
+          ssh-agent sh -c 'echo "${{ secrets.SSH_DEPLOY_KEY1 }}" | ssh-add - && git clone git@github.com:barbatevgen/testkube.git'
+          
+      
+    
+       
+    - name: pwd
+      run: pwd
+    - name: ls -la
+      run: ls -la
+      
+      
+    - name: Push generated webpage to another repository
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        GH_USERNAME: ${{ secrets.GH_USERNAME }}
+        USER_EMAIL: ${{ secrets.USER_EMAIL }}
+        DESTINATION_REPO_NAME: ${{ secrets.DESTINATION_REPO_NAME }}
+      with:
+        source-directory: 'nginx+mysql1'
+        destination-github-username: 'barbatevgen' #${{ secrets.GH_USERNAME }}
+        destination-repository-name: 'testkub' #${{ secrets.DESTINATION_REPO_NAME }}
+        user-email: ${{ secrets.USER_EMAIL }}
+        commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+        target-branch: main
+        target-directory: 'nginx+mysql-argocd/web-write-db'     
+      
+      
+      
+      
+          
+          
+          
+          
