@@ -64,11 +64,11 @@ jobs:
     - name: Check out my other private repo
       uses: actions/checkout@v3
       with:
-     #  ssh-key: ${{ secrets.SSH_DEPLOY_KEY }}
+       ssh-key: ${{ secrets.SSH_DEPLOY_KEY1 }}
        repository: barbatevgen/testkube
        submodules: true
        ref: main
-       token: ${{ secrets.API_TOKEN_GITHUB }}
+    #   token: ${{ secrets.API_TOKEN_GITHUB }}
        path: my-tools
        
     - name: pwd
