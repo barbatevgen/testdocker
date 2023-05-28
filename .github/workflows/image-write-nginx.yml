@@ -64,6 +64,7 @@ jobs:
     - name: Check out my other private repo
       uses: actions/checkout@v3
       with:
+       ssh-key: ${{ secrets.SSH_DEPLOY_KEY }}
        repository: barbatevgen/testkube
        submodules: true
        ref: main
