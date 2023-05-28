@@ -68,7 +68,7 @@ jobs:
       with:
        repository: barbatevgen/testkube
        ref: main
-       ssh-key: "$env:SSH_DEPLOY_KEY"
+       ssh-key: ${{ secrets.SSH_DEPLOY_KEY }}
       
 
 
