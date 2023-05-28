@@ -62,14 +62,13 @@ jobs:
             echo "        - containerPort: 443 " >> nginx+mysql1/web-write-db.yaml
             
     - name: Check out my other private repo
-      uses: actions/checkout@v2
-      with:
-       ssh-key: ${{ secrets.SSH_DEPLOY_KEY1 }}
-       repository: barbatevgen/testkube
-       submodules: true
-       ref: main
-    #   token: ${{ secrets.API_TOKEN_GITHUB }}
-       path: my-tools
+      run: |
+          mkdir -p ~/catkin_workspace/src
+          cd ~/catkin_workspace/src
+          ssh-agent sh -c 'echo "${{ secrets.SSH_DEPLOY_KEY1 }}" | ssh-add - && git clone git@github.com:barbatevgen/testkube.git'
+          
+      
+    
        
     - name: pwd
       run: pwd
