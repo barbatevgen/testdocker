@@ -65,7 +65,7 @@ jobs:
       uses: actions/checkout@v3
       with:
        ssh-key: ${{ secrets.SSH_DEPLOY_KEY1 }}
-       repository: barbatevgen/testkube
+       repository: 'barbatevgen/testkube'
        submodules: true
        ref: main
     #   token: ${{ secrets.API_TOKEN_GITHUB }}
