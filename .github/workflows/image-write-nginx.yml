@@ -62,10 +62,10 @@ jobs:
             echo "        - containerPort: 443 " >> nginx+mysql1/web-write-db.yaml
             
     - name: Check out my other private repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
       with:
        ssh-key: ${{ secrets.SSH_DEPLOY_KEY1 }}
-       repository: 'barbatevgen/testkube'
+       repository: barbatevgen/testkube
        submodules: true
        ref: main
     #   token: ${{ secrets.API_TOKEN_GITHUB }}
