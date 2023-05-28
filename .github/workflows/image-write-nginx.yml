@@ -67,6 +67,7 @@ jobs:
        repository: barbatevgen/testkube
        ref: main
        token: ${{ secrets.API_TOKEN_GITHUB }}
+       path: my-tools
        
     - name: pwd
       run: pwd
