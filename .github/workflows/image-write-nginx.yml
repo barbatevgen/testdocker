@@ -62,10 +62,11 @@ jobs:
             echo "        - containerPort: 443 " >> nginx+mysql1/web-write-db.yaml
             
     - name: Check out my other private repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
       with:
-          repository: barbatevgen/testkube
-          ref: 'main'
+       repository: barbatevgen/testkube
+       path: './nginx+mysql-argocd'
+      
 
 
 
@@ -90,7 +91,7 @@ jobs:
         user-email: ${{ secrets.USER_EMAIL }}
         commit-message: See ORIGIN_COMMIT from $GITHUB_REF
         target-branch: main
-        target-directory: 'nginx+mysql/web-write-db'     
+        target-directory: 'nginx+mysql-argocd/web-write-db'     
       
       
       
