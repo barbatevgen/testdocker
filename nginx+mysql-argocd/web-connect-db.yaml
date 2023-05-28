@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connect-deployment
+  labels:
+    app: connect
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: connect
+  template:
+    metadata:
+      labels:
+        app: connect
+    spec:
+      containers:
+      - name: nginx-connect
+        image: ebarbat/test:nginxCon
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 80
+        - containerPort: 443

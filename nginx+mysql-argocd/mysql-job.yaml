@@ -1,0 +1,27 @@
+#mysql -u root -h mysql -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS test;"
+#mysql -u root -h mysql -p$MYSQL_ROOT_PASSWORD -e "create table connect (ID integer, Time integer);"
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mysql-job
+spec:
+  template:
+    metadata:
+      name: mysql-job
+    spec:
+      containers:
+      - name: setting-db
+        image: mysql:8.0
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-password
+                key: MYSQL_ROOT_PASSWORD
+        command:
+        - "bin/sh"
+        - "-c"
+        - |
+         mysql -u root -h mysql -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS test;"
+         mysql -u root -h mysql test -p$MYSQL_ROOT_PASSWORD -e "create table connect (ID integer, Date DATE, Time TIME);" 
+      restartPolicy: Never

@@ -1,0 +1,13 @@
+minikube start --nodes 3 -p eb-test
+minikube stop
+minikube delete
+minikube addon enable metrics-server -p eb-test
+minikube service nginx-connect --url  --namespace=nginx-phpfpm-mysql -p eb-test
+minikube stop -p eb-tes
+minikube status
+minikube profile list
+minikube delete -p eb-tes
+minikube tunnel
+
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/core-install.yaml
