@@ -26,11 +26,11 @@ jobs:
       run: |
             echo "time=$(date +'%Y-%m-%dT-%H-%M-%S')" >> ${GITHUB_ENV}
 
-  #  - name: Build the Docker image
-  #    run: docker build . --file nginx+mysql/write/Dockerfile --tag ebarbat/test:Write$time
+    - name: Build the Docker image
+      run: docker build . --file nginx+mysql/write/Dockerfile --tag ebarbat/test:Write$time
       
-  #  - name: Push the Docker image
-  #    run: docker push ebarbat/test:Write$time  #nginxWrite-q
+    - name: Push the Docker image
+      run: docker push ebarbat/test:Write$time  #nginxWrite-q
       
     - name: create folder
       run: mkdir nginx+mysql1
